@@ -11,7 +11,7 @@ import { env } from "./env.mjs";
 export type { Session } from "next-auth";
 
 // Update this whenever adding new providers so that the client can
-export const providers = ["discord"] as const;
+export const providers = ["discord", "email"] as const;
 export type OAuthProviders = (typeof providers)[number];
 
 declare module "next-auth" {
