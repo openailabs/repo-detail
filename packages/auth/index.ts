@@ -1,4 +1,5 @@
 import Discord from "@auth/core/providers/discord";
+import EmailProvider from "@auth/core/providers/email";
 import type { DefaultSession } from "@auth/core/types";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
@@ -31,6 +32,29 @@ export const {
     Discord({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+    }),
+    EmailProvider({
+      // server: {
+      // 	host: "localhost",
+      // 	port: 1025,
+      // 	secure: false,
+      // 	tls: { rejectUnauthorized: false },
+      // 	auth: {
+      // 		user: "",
+      // 		pass: "",
+      // 		//   user: env.EMAIL_SERVER_USER,
+      // 		//   pass: env.EMAIL_SERVER_PASSWORD,
+      // 	},
+      // },
+      // // it is required in new version
+      id: "email",
+      name: "email",
+      from: "admin@localhost",
+      type: "email",
+      sendVerificationRequest: (data) => {
+        console.log("Sending verification request: ", data.url);
+        // throw new Error("Not implemented");
+      },
     }),
   ],
   callbacks: {
